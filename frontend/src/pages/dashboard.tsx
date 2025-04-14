@@ -341,7 +341,7 @@ export default function Dashboard() {
                       <StatNumber>{stats.total}</StatNumber>
                       <StatHelpText>
                         <StatArrow type="increase" />
-                        {((stats.total / (stats.total || 1)) * 100).toFixed(0)}%
+                        {stats.total > 0 ? '100' : '0'}%
                       </StatHelpText>
                     </Stat>
                   </CardBody>
