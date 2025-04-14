@@ -63,6 +63,16 @@ import { AxiosError } from 'axios';
 
 interface ErrorResponse { message: string; }
 
+interface Project {
+  _id: string;
+  title: string;
+  description: string;
+  status: string;
+  priority: number;
+  createdAt: string;
+  expectedEndDate: string;
+}
+
 // API base URL from environment variable or default
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
 
@@ -194,14 +204,23 @@ export default function Dashboard() {
     return matchesSearch && matchesStatus;
   }).sort((a, b) => {
     switch (sortBy) {
-      case 'newest':
-        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-      case 'oldest':
-        return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+      case 'newest': {
+        const dateB = new Date(b.createdAt).valueOf();
+        const dateA = new Date(a.createdAt).valueOf();
+        return dateB - dateA;
+      }
+      case 'oldest': {
+        const dateB = new Date(b.createdAt).valueOf();
+        const dateA = new Date(a.createdAt).valueOf();
+        return dateA - dateB;
+      }
       case 'priority':
         return (b.priority || 0) - (a.priority || 0);
-      case 'deadline':
-        return new Date(a.expectedEndDate).getTime() - new Date(b.expectedEndDate).getTime();
+      case 'deadline': {
+        const dateB = new Date(b.expectedEndDate).valueOf();
+        const dateA = new Date(a.expectedEndDate).valueOf();
+        return dateA - dateB;
+      }
       default:
         return 0;
     }
