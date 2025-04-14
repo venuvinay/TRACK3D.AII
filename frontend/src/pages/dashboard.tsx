@@ -195,13 +195,13 @@ export default function Dashboard() {
   }).sort((a, b) => {
     switch (sortBy) {
       case 'newest':
-        return new Date(b.createdAt) - new Date(a.createdAt);
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
       case 'oldest':
-        return new Date(a.createdAt) - new Date(b.createdAt);
+        return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
       case 'priority':
         return (b.priority || 0) - (a.priority || 0);
       case 'deadline':
-        return new Date(a.expectedEndDate) - new Date(b.expectedEndDate);
+        return new Date(a.expectedEndDate).getTime() - new Date(b.expectedEndDate).getTime();
       default:
         return 0;
     }
