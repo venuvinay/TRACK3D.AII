@@ -59,6 +59,9 @@ import { useAuth } from '../contexts/AuthContext';
 import ProjectForm from '../components/ProjectForm';
 import ProjectAnalytics from '../components/ProjectAnalytics';
 import ProjectList from '../components/ProjectList';
+import { AxiosError } from 'axios';
+
+interface ErrorResponse { message: string; }
 
 // API base URL from environment variable or default
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
@@ -120,7 +123,7 @@ export default function Dashboard() {
         });
         onClose();
       },
-      onError: (error) => {
+      onError: (error: AxiosError<ErrorResponse>) => {
         toast({
           title: 'Error creating project',
           description: error.response?.data?.message || 'Something went wrong',
