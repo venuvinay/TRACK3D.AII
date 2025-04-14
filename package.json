@@ -1,0 +1,16 @@
+{
+  "name": "construction-project-analytics",
+  "version": "1.0.0",
+  "description": "Construction Project Analytics Platform",
+  "scripts": {
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
+    "start:backend": "cd backend && npm run dev",
+    "start:frontend": "cd frontend && npm run dev",
+    "dev": "concurrently \"npm run start:backend\" \"npm run start:frontend\""
+  },
+  "dependencies": {
+    "chart.js": "^4.4.8",
+    "react-chartjs-2": "^5.3.0",
+    "concurrently": "^8.2.2"
+  }
+}
