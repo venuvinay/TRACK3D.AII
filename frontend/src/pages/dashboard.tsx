@@ -74,7 +74,7 @@ interface Project {
 }
 
 // API base URL from environment variable or default
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
 export default function Dashboard() {
   const { user, token, logout } = useAuth();
